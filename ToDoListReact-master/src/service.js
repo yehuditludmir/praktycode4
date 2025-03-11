@@ -2,7 +2,7 @@ import axios from 'axios';
 import api from './axiosInterceptor';
 
 
-const apiUrl = "http://localhost:5221";
+const apiUrl = process.env.REACT_APP_MY_API;
 
 export default {
   
