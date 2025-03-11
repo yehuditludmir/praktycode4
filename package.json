@@ -1,0 +1,17 @@
+{
+  "name": "praktycode4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@api/render-api": "file:.api/apis/render-api",
+    "api": "^6.1.3",
+    "express": "^4.21.2"
+  }
+}
