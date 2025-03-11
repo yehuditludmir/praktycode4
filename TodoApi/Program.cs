@@ -34,8 +34,8 @@ builder.Services.AddDbContext<Praktykod2Context>(options =>
         new MySqlServerVersion(new Version(8, 0, 41))));
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI(options => 
     {
@@ -43,12 +43,15 @@ if (app.Environment.IsDevelopment())
       options.RoutePrefix = string.Empty;;
     });
     
-}
+// }
 
 app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
 
-
+app.MapGet("/", () =>
+{
+    return "hi - the applicatin";
+});
 //שליפת כל המשימות
 app.MapGet("/items", async (Praktykod2Context db) =>
 {
