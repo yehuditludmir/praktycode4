@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen(options =>
 //חיבור למסד mySql
 builder.Services.AddDbContext<Praktykod2Context>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 41))));
+        new MySqlServerVersion(new Version(8, 0, 41)) ,  mysqlOptions => mysqlOptions.EnableRetryOnFailure()));
 var app = builder.Build();
 
 // if (app.Environment.IsDevelopment())
