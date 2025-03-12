@@ -1,4 +1,3 @@
-
 using Swashbuckle.AspNetCore.Swagger;
 using TodoApi.Models;
 using Microsoft.OpenApi.Models;
@@ -29,8 +28,8 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 //חיבור למסד mySql
-builder.Services.AddDbContext<Praktykod2Context>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+builder.Services.AddDbContext<Bky8sxn0fpocen5rglptContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("ToDoDB"),
         new MySqlServerVersion(new Version(8, 0, 41)) ,  mysqlOptions => mysqlOptions.EnableRetryOnFailure()));
 var app = builder.Build();
 
@@ -53,14 +52,14 @@ app.MapGet("/", () =>
     return "hi - the applicatin";
 });
 //שליפת כל המשימות
-app.MapGet("/items", async (Praktykod2Context db) =>
+app.MapGet("/items", async (Bky8sxn0fpocen5rglptContext db) =>
 {
     var users = await db.Items.ToListAsync();
     return Results.Ok(users);
 })
 ;
 //הופסת משימה
-app.MapPost("/additem", async (Item i,Praktykod2Context p) =>
+app.MapPost("/additem", async (Item i,Bky8sxn0fpocen5rglptContext p) =>
 {
 
 Item it=new Item();
@@ -70,7 +69,7 @@ it.IsComplete=false;
    return Results.Ok(p.SaveChanges());
 });
 //מחיקת משימה
-app.MapDelete("/del/{iid}", async (int iid,Praktykod2Context p) => 
+app.MapDelete("/del/{iid}", async (int iid,Bky8sxn0fpocen5rglptContext p) => 
 {
    
     var ddd=p.Items.FirstOrDefault(z=>z.Id==iid);
@@ -82,7 +81,7 @@ app.MapDelete("/del/{iid}", async (int iid,Praktykod2Context p) =>
 
 } );
 //עדכון משימה
-app.MapPut("/updateItem/{id}", async (int Id, Item ic, Praktykod2Context p) =>
+app.MapPut("/updateItem/{id}", async (int Id, Item ic, Bky8sxn0fpocen5rglptContext p) =>
 {
    
     var todo = await p.Items.FindAsync(Id);
@@ -96,5 +95,5 @@ app.MapPut("/updateItem/{id}", async (int Id, Item ic, Praktykod2Context p) =>
     return Results.NoContent();
 });
 
-
+app.MapControllers();
 app.Run();
